@@ -3,7 +3,7 @@ from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, auto_field
 from marshmallow_enum import EnumField
 from core.models.assignments import Assignment, GradeEnum
 from core.libs.helpers import GeneralObject
-
+from core.models.teachers import Teacher
 
 class AssignmentSchema(SQLAlchemyAutoSchema):
     class Meta:
@@ -23,6 +23,12 @@ class AssignmentSchema(SQLAlchemyAutoSchema):
     def initiate_class(self, data_dict, many, partial):
         # pylint: disable=unused-argument,no-self-use
         return Assignment(**data_dict)
+
+class TeacherSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Teacher
+        include_fk = True
+        load_instance = True
 
 
 class AssignmentSubmitSchema(Schema):
